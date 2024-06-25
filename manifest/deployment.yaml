@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-service-gin-deployment
+  namespace: web-service-gin
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-service-gin
+  template:
+    metadata:
+      labels:
+        app: web-service-gin
+    spec:
+      containers:
+      - name: web-service-gin
+        image: web-service-gin
+        imagePullPolicy: Never  # ローカルにあるDockerイメージを読み込む
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
